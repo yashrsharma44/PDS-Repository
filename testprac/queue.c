@@ -7,9 +7,13 @@ struct node{
 	struct node *next;
 };
 
+struct node *queueA=NULL, *queueB=NULL, *queueC=NULL;
+
 void displayQueue(struct node *queue)
 {
 	struct node *temp = queue;
+	if(temp!=NULL)
+	{
 	printf("---------------\n");
 	while(temp!=NULL)
 	{
@@ -18,11 +22,13 @@ void displayQueue(struct node *queue)
 		temp = temp->next;
 	}
 	printf("---------------\n");
+	}
+	else printf("EMPTY\n");	
 }
 
 int displayNumber(struct node *queue)
 {
-	int n;
+	int n=0;
 	struct node *temp=queue;
 	while(temp!=NULL)
 	{
@@ -32,40 +38,49 @@ int displayNumber(struct node *queue)
 	return(n);
 }
 
-void addPerson(struct node *queue)
+struct node *addPerson(struct node *queue)
 {
 	printf("Enter the Name and Voter ID\n");
 	struct node *temp;
 	temp = (struct node *)malloc(sizeof(struct node));
 	scanf("%s%d",temp->name,&temp->vot);
 	temp->next = queue;
-	queue = temp;
-	
+	return temp;
+
 }
 
 void enqueue(struct node *queueA,struct node *queueB,struct node *queueC)
 {
+	
+	
+
 	int a = displayNumber(queueA);
 	int b = displayNumber(queueB);
 	int c = displayNumber(queueC);
-
-	int max = a;
+	printf("a %d b %d c %d\n",a,b,c);
+	int min = a;
 	int dig = 1;
-	if(b>max)
+	if(b<min)
 	{
-		if(c>max)
+		if(c<min)
 		{
 			dig = 3;
 		}
 		else
 			dig = 2;
 	}
-	if(dig==1)
-		addPerson(queueA);
-	else if(dig==2)
-		addPerson(queueB);
-	else
-		addPerson(queueC);
+	if(dig==1){
+		printf("In dig A\n");
+		queueA = addPerson(queueA);
+	}
+	else if(dig==2){
+		queueB = addPerson(queueB);
+	}
+	else{
+		queueC = addPerson(queueC);
+	}
+
+	
 
 }
 
@@ -79,9 +94,9 @@ void dequeue(struct node *queue)
 
 	}
 	
-	temp->next = NULL;
-	free(temp);
-	prev->next = NULL;
+	
+	free(prev);
+	
 }
 
 int main()
@@ -113,17 +128,57 @@ int main()
 		else if(n==2)
 		{
 			printf("-------------------\n");
-			printf("QueueA\n");
-			printf("%d",displayNumber(queueA));
-			printf("QueueB\n");
-			printf("%d",displayNumber(queueB));
-			printf("QueueC\n");
-			printf("%d",displayNumber(queueC));
+			printf("QueueA ");
+			printf("%d\n",displayNumber(queueA));
+			printf("QueueB ");
+			printf("%d\n",displayNumber(queueB));
+			printf("QueueC ");
+			printf("%d\n",displayNumber(queueC));
 			printf("-------------------\n");
 		}
 		else if(n==3)
 		{
-			enqueue(queueA,queueB,queueC);
+			int a = displayNumber(queueA);
+	int b = displayNumber(queueB);
+	int c = displayNumber(queueC);
+	printf("a %d b %d c %d\n",a,b,c);
+	int min = a;
+	int dig = 1;
+	if(b<min)
+	{
+		if(c<min)
+		{
+			dig = 3;
+		}
+		else
+			dig = 2;
+	}
+	if(dig==1){
+		printf("In dig A\n");
+		queueA = addPerson(queueA);
+	}
+	else if(dig==2){
+		queueB = addPerson(queueB);
+	}
+	else{
+		queueC = addPerson(queueC);
+	}
+			printf("Display QUEUE A\n");
+
+			struct node *temp = queueA;
+	if(temp!=NULL)
+	{
+	printf("---------------\n");
+	while(temp!=NULL)
+	{
+		
+		printf("Name : %s Voter ID: %d\n",temp->name,temp->vot);
+		temp = temp->next;
+	}
+	printf("---------------\n");
+	}
+	else printf("EMPTY\n");	
+
 		}
 		else if(n==4)
 		{

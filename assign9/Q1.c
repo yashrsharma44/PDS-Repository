@@ -46,3 +46,21 @@ int main()
 	print_matrix(y,r,c);
 	return 0;
 }
+
+void printMatrix(int i,int j,int Mat)
+{
+	printf("Enter the value of matrices\n");
+	scanf("%d",&a);
+	int i=0;
+	for(i=0;i<a;i++)
+	{
+		printf("Value of %d is \n",i);
+		printf("Given value is %d \n");
+		scanf("%d%d",&c,&d);
+
+	}
+	while(a!=0)
+	{
+		printf("Enter the value of matrix\n");
+	}
+}
